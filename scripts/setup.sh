@@ -34,6 +34,16 @@ ls *_R1_*.fastq.gz | cut -f1 -d'_' > samples.txt
 
 cd ..
 
+### Setup reference directories ##########################################################
+mkdir -p ref && cd ref
+cp /c1/apps/trimmomatic/Trimmomatic-0.33/adapters/NexteraPE-PE.fa adapters.fa
+echo '' >> adapters.fa
+
+# Also, download the FASTA for HXB2 K03455 from NCBI
+# Save as HIV_B.K03455.HXB2.fasta 
+
+cd ..
+
 
 ### Create analysis directories ##########################################################
 mkdir -p Analysis && cd Analysis
@@ -47,12 +57,8 @@ cat samples.txt | while read s; do
     cp ../Data/${s}_*R2*.fastq.gz $s/00_raw/original_2.fastq.gz    
 done
 
+# Symlink scripts here to make paths shorter
+ln -s ../scripts/haphpipe_consensus.sh
+ln -s ../scripts/run_array.sh
 
-### Setup reference directories ##########################################################
-mkdir -p ref && cd ref
-cp /c1/apps/trimmomatic/Trimmomatic-0.33/adapters/NexteraPE-PE.fa adapters.fa
-echo '' >> adapters.fa
-
-# Also, download the FASTA for HXB2 K03455 from NCBI
-# Save as HIV_B.K03455.HXB2.fasta 
-
+cd ..
