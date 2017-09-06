@@ -42,6 +42,27 @@ echo '' >> adapters.fa
 # Also, download the FASTA for HXB2 K03455 from NCBI
 # Save as HIV_B.K03455.HXB2.fasta 
 
+# Create references for the sequenced regions
+
+##########################################################################################
+# This is python:
+python << EOF
+from Bio import SeqIO
+s = SeqIO.read('HIV_B.K03455.HXB2.fasta', 'fasta')
+with open('HXB2.regions.fasta', 'w') as outh:
+    print >>outh, '>HIV_B.PRRT'
+    ss = str(s[2084:3869].seq)
+    print >>outh, '\n'.join(ss[i:i+60] for i in range(0, len(ss), 60))
+    print >>outh, '>HIV_B.INT'
+    ss = str(s[4229:5096].seq)
+    print >>outh, '\n'.join(ss[i:i+60] for i in range(0, len(ss), 60))
+    print >>outh, '>HIV_B.ENV'
+    ss = str(s[6224:8795].seq)
+    print >>outh, '\n'.join(ss[i:i+60] for i in range(0, len(ss), 60))
+
+EOF
+##########################################################################################
+
 cd ..
 
 

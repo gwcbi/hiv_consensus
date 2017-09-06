@@ -6,5 +6,8 @@ else
     exit 1
 fi
 
-. haphpipe_consensus.sh $samp ../ref/HIV_B.K03455.HXB2.fasta ../ref/adapters.fa &> $samp/hp.log
+cmd=". haphpipe_consensus.sh $samp ../ref/HXB2.regions.fasta ../ref/adapters.fa &> $samp/hp.log"
+echo -e "Command line:\n$cmd"
+eval $cmd
 
+exit 0

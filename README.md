@@ -17,5 +17,10 @@ After setting up the directory according to `setup.sh`, all the analysis can be 
 using the following array job (from within the `Analysis` directory):
 
 ```bash
-sbatch -N 1 -a 1-$(wc -l < samples.txt) -p short,defq -t 240 run_array.sh
+sbatch \
+ -N 1 -p short,defq -t 240 \
+ -a 1-$(wc -l < samples.txt) \
+ --export idlist=samples.txt \
+ run_array.sh
+
 ```
