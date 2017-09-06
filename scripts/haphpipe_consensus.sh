@@ -417,7 +417,7 @@ else
     fi
     
     #--- Number of read pairs after QC
-    numclean=$(head -n1 PL-94/04_fixed/bowtie2.out  | cut -d' ' -f1)
+    numclean=$(head -n1 $samp/04_fixed/bowtie2.out  | cut -d' ' -f1)
     
     #--- Alignment rate (calculated by bowtie2)
     alnrate=$(grep 'overall alignment rate' $samp/04_fixed/bowtie2.out | sed 's/% overall alignment rate//')
